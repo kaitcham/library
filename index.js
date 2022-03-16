@@ -1,12 +1,12 @@
-const booksList = document.querySelector(".books-container");
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const formSubmit = document.querySelector(".book-form");
+const booksList = document.querySelector('.books-container');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const formSubmit = document.querySelector('.book-form');
 
 let booksArray = [];
 
 const addBook = () => {
-  let booksCode = "";
+  let booksCode = '';
   booksArray.forEach((element) => {
     const { title, author } = element;
     booksCode += `
@@ -19,7 +19,7 @@ const addBook = () => {
         `;
   });
   booksList.innerHTML = booksCode;
-  localStorage.setItem("booksData", JSON.stringify(booksArray));
+  localStorage.setItem('booksData', JSON.stringify(booksArray));
 };
 
 window.removeBook = (title) => {
@@ -27,17 +27,17 @@ window.removeBook = (title) => {
   addBook();
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-  let books = JSON.parse(localStorage.getItem("booksData"));
+window.addEventListener('DOMContentLoaded', () => {
+  const books = JSON.parse(localStorage.getItem('booksData'));
   if (books === null) {
     booksArray = [
       {
-        title: "Book one",
-        author: "Kait",
+        title: 'Book one',
+        author: 'Kait',
       },
       {
-        title: "Book two",
-        author: "Cham",
+        title: 'Book two',
+        author: 'Cham',
       },
     ];
   } else {
@@ -46,8 +46,8 @@ window.addEventListener("DOMContentLoaded", () => {
   addBook();
 });
 
-formSubmit.addEventListener("submit", (event) => {
-  if (title.value === "" || author.value === "") {
+formSubmit.addEventListener('submit', (event) => {
+  if (title.value === '' || author.value === '') {
     event.preventDefault();
   }
   event.preventDefault();
@@ -57,6 +57,6 @@ formSubmit.addEventListener("submit", (event) => {
   };
   booksArray.push(bookInput);
   addBook();
-  title.value = "";
-  author.value = "";
+  title.value = '';
+  author.value = '';
 });
