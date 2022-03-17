@@ -8,23 +8,56 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="books">
-      <h1>Awesome Books</h1>
-      <div class="books-container"></div>
-      <hr />
-      <div>
-        <h2>Add a New Book</h2>
-        <form class="book-form">
-          <p>
-            <input type="text" name="title" id="title" placeholder="Title" />
-          </p>
-          <p>
-            <input type="text" name="author" id="author" placeholder="Author" />
-          </p>
-          <button type="submit">Add</button>
-        </form>
+    <!-- Header -->
+    <header>
+      <div class="header">
+        <div class="logo">Awesome Books</div>
+        <nav>
+          <ul>
+            <li><a href="#home">List</a></li>
+            <li><a href="#addBook">Add New</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
       </div>
-    </div>
+    </header>
+    <!-- Main -->
+    <main>
+      <section class="page" id="home">
+        <h2>All Awesome Books</h2>
+        <div class="books-container"></div>
+      </section>
+      <section class="page" id="addBook">
+        <h2>Add a new book</h2>
+        <div class="form-container">
+          <form class="book-form">
+            <input type="text" name="title" id="title" placeholder="Title" />
+            <input type="text" name="author" id="author" placeholder="Author" />
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </section>
+      <section class="page" id="contact">
+        <h2>Contact information</h2>
+        <div class="contact-container">
+          <p>
+            Do have any question or you just want to say "Hello"? <br />
+            You can reach out to us
+          </p>
+          <div class="contact-details">
+            <ul>
+              <li>Our e-mail: mail@mail.com</li>
+              <li>Our phone number: 0044586534422</li>
+              <li>Our address: Streetname 22, 84503 city, country</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <div class="footer">Copyright ...</div>
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>
