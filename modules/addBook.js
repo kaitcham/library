@@ -1,4 +1,7 @@
 const booksList = document.querySelector('.books-container');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const formSubmit = document.querySelector('.book-form');
 
 let booksArray = [];
 
@@ -40,5 +43,20 @@ window.removeBook = (title) => {
   setBooksArray(booksArray.filter((elem) => elem.title !== title));
   addBook();
 };
+
+formSubmit.addEventListener('submit', (event) => {
+  if (title.value === '' || author.value === '') {
+    event.preventDefault();
+  }
+  event.preventDefault();
+  const bookInput = {
+    title: title.value,
+    author: author.value,
+  };
+  booksArray.push(bookInput);
+  addBook();
+  title.value = '';
+  author.value = '';
+});
 
 export { setBooksArray, addBook };
