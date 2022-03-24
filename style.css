@@ -59,6 +59,13 @@ main {
   justify-content: center;
 }
 
+.date-container {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  font-weight: 400;
+}
+
 #home {
   display: block;
   padding: 15px 0;
