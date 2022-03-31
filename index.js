@@ -1,49 +1,22 @@
-const booksList = document.querySelector('.books-container');
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const formSubmit = document.querySelector('.book-form');
+import render from './modules/render.js';
+import { setBooksArray, addBook } from './modules/addBook.js';
+import { DateTime } from './modules/luxon.js';
 
-let booksArray = [];
+const date = document.querySelector('.date-container');
 
-const addBook = () => {
-  let booksCode = '';
-  booksArray.forEach((element, index) => {
-    const { title, author } = element;
-    if (index % 2 === 0) {
-      booksCode += `
-        <div class="book changeColor">
-            <div class="sub-book">
-              <p>${title}</p>
-              <p>${author}</p>
-            </div>
-            <button type="submit" class="delete" onclick='removeBook("${title}")'>Remove</button>
-        </div>
-            `;
-    } else {
-      booksCode += `
-        <div class="book">
-          <div class="sub-book">
-            <p>${title}</p>
-            <p>${author}</p>
-          </div>
-          <button type="submit" class="delete" onclick='removeBook("${title}")'>Remove</button>
-        </div>
-            `;
-    }
-  });
-  booksList.innerHTML = booksCode;
-  localStorage.setItem('booksData', JSON.stringify(booksArray));
+/* eslint-disable no-undef */
+const loadDate = () => {
+  date.innerHTML = DateTime.now().toLocaleString(
+    DateTime.DATETIME_MED_WITH_SECONDS,
+  );
 };
 
-window.removeBook = (title) => {
-  booksArray = booksArray.filter((elem) => elem.title !== title);
-  addBook();
-};
+setInterval(loadDate, 1000);
 
 window.addEventListener('DOMContentLoaded', () => {
   const books = JSON.parse(localStorage.getItem('booksData'));
   if (books === null) {
-    booksArray = [
+    const defaultArray = [
       {
         title: 'Book one',
         author: 'Kait',
@@ -53,50 +26,13 @@ window.addEventListener('DOMContentLoaded', () => {
         author: 'Cham',
       },
     ];
+    setBooksArray(defaultArray);
   } else {
-    booksArray = books;
+    setBooksArray(books);
   }
   addBook();
 });
-
-const render = (hashKey) => {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach((page) => {
-    page.style.display = 'none';
-  });
-  switch (hashKey) {
-    case '':
-      pages[0].style.display = 'block';
-      break;
-    case '#home':
-      pages[0].style.display = 'block';
-      break;
-    case '#addBook':
-      pages[1].style.display = 'block';
-      break;
-    case '#contact':
-      pages[2].style.display = 'block';
-      break;
-    default:
-      pages[0].style.display = 'block';
-  }
-};
 
 window.onhashchange = () => {
   render(window.location.hash);
 };
-
-formSubmit.addEventListener('submit', (event) => {
-  if (title.value === '' || author.value === '') {
-    event.preventDefault();
-  }
-  event.preventDefault();
-  const bookInput = {
-    title: title.value,
-    author: author.value,
-  };
-  booksArray.push(bookInput);
-  addBook();
-  title.value = '';
-  author.value = '';
-});
